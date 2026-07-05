@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -7,9 +7,18 @@ import AddHabitForm from "./components/AddHabitForm";
 import Stats from "./components/Stats";
 
 export default function App() {
-  const [habits, setHabits] = useState([]);
+  const [habits, setHabits] = useState(() => {
+    const savedHabits = localStorage.getItem("habits");
+    if (savedHabits) {
+      return JSON.parse(savedHabits);
+    }
+    return [];
+  });
   const [habitTitle, setHabitTitle] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem("habits", JSON.stringify(habits));
+  }, [habits]);
   function addHabit() {
     if (!habitTitle.trim()) {
       return;
