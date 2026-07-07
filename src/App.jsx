@@ -1,10 +1,12 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HabitList from "./components/HabitList";
 import AddHabitForm from "./components/AddHabitForm";
 import Stats from "./components/Stats";
+import HabitSearch from "./components/HabitSearch";
+import HabitFilter from "./components/HabitFilter";
 
 export default function App() {
   const [habits, setHabits] = useState(() => {
@@ -15,6 +17,22 @@ export default function App() {
     return [];
   });
   const [habitTitle, setHabitTitle] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const visibleHabits = habits
+    .filter((habit) => habit.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter((habit) => {
+      if (statusFilter === "all") {
+        return true;
+      }
+      if (statusFilter === "active") {
+        return habit.completed === false;
+      }
+      if (statusFilter === "completed") {
+        return habit.completed === true;
+      }
+      return true;
+    });
 
   useEffect(() => {
     localStorage.setItem("habits", JSON.stringify(habits));
@@ -55,8 +73,11 @@ export default function App() {
   return (
     <>
       <Header text="Habit Tracker" title="Track Your Habits" />
+      <HabitSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <HabitFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
       <AddHabitForm habitTitle={habitTitle} setHabitTitle={setHabitTitle} onAddHabit={addHabit} />
-      <HabitList habits={habits} onDelete={deleteHabit} onToggle={toggleHabit} />
+      <HabitList habits={visibleHabits} onDelete={deleteHabit} onToggle={toggleHabit} />
+
       <Stats completedCount={completedCount} totalCount={habits.length} />
       <Footer />
     </>
