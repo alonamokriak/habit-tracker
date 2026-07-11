@@ -1,16 +1,60 @@
-# React + Vite
+# Habit Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Habit Tracker is a React application for creating, tracking, filtering, and managing daily habits.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+https://habit-tracker-gamma-fawn.vercel.app/
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Add new habits
+- Delete habits
+- Mark habits as completed
+- Search habits by title
+- Filter habits by status: all, active, completed
+- Save habits in localStorage
+- Track completed, active, and total habits
+- Display progress with a progress bar
+- Responsive layout
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- JavaScript
+- CSS
+- localStorage
+- Lucide React
+- Git / GitHub
+
+## What I Practiced
+
+- React components
+- Props
+- useState
+- useEffect
+- Controlled inputs
+- Working with arrays using map and filter
+- Conditional rendering
+- Conditional CSS classes
+- Local storage persistence
+- Responsive design
+
+## Project Structure
+
+```txt
+src/
+  components/
+    AddHabitForm.jsx
+    Footer.jsx
+    HabitCard.jsx
+    HabitFilter.jsx
+    HabitList.jsx
+    HabitSearch.jsx
+    Header.jsx
+    Stats.jsx
+  App.jsx
+  App.css
+  index.css
+  main.jsx
