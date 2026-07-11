@@ -1,7 +1,8 @@
 export default function AddHabitForm({ habitTitle, setHabitTitle, onAddHabit }) {
   return (
-    <>
+    <div className="add-form">
       <input
+        className="add-form__input"
         placeholder="Enter your Habit"
         type="text"
         value={habitTitle}
@@ -12,7 +13,9 @@ export default function AddHabitForm({ habitTitle, setHabitTitle, onAddHabit }) 
           }
         }}
       ></input>
-      <button onClick={onAddHabit}>Add Habit</button>
-    </>
+      <button className="add-form__button" onClick={onAddHabit}>
+        Add Habit
+      </button>
+    </div>
   );
 }

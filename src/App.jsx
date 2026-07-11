@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import { Trash2 } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HabitList from "./components/HabitList";
@@ -69,17 +70,26 @@ export default function App() {
   }
 
   const completedCount = habits.filter((habit) => habit.completed === true).length;
-
+  const totalCount = habits.length;
+  const activeCount = totalCount - completedCount;
+  const progressPercent = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
   return (
-    <>
-      <Header text="Habit Tracker" title="Track Your Habits" />
-      <HabitSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <HabitFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
-      <AddHabitForm habitTitle={habitTitle} setHabitTitle={setHabitTitle} onAddHabit={addHabit} />
-      <HabitList habits={visibleHabits} onDelete={deleteHabit} onToggle={toggleHabit} />
+    <div className="app">
+      <div className="app__container">
+        <Header title="Habit Tracker" text="Track Your Habits" />
+        <main className="app__main">
+          <div className="toolbar">
+            <HabitSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <HabitFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
+          </div>
 
-      <Stats completedCount={completedCount} totalCount={habits.length} />
-      <Footer />
-    </>
+          <AddHabitForm habitTitle={habitTitle} setHabitTitle={setHabitTitle} onAddHabit={addHabit} />
+          <HabitList habits={visibleHabits} onDelete={deleteHabit} onToggle={toggleHabit} />
+          <Stats completedCount={completedCount} totalCount={totalCount} activeCount={activeCount} progressPercent={progressPercent} />
+        </main>
+
+        <Footer />
+      </div>
+    </div>
   );
 }
